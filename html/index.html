@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROCK-PAPER-SCISSORS</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>
+        <span class="main"> ROCK-PAPER-SCISSORS</span>
+        <span class="sub">a.k.a samsepan</span>
+      </h1>
+
+      <div id="com">
+        <ul>
+          <li><img src="../images/rock.svg" alt="" /></li>
+          <li><img src="../images/paper.svg" alt="" /></li>
+          <li><img src="../images/scissors.svg" alt="" /></li>
+        </ul>
+      </div>
+      <div id="player">
+        <ul>
+          <li><img src="../images/rock.svg" alt="" /></li>
+          <li><img src="../images/paper.svg" alt="" /></li>
+          <li><img src="../images/scissors.svg" alt="" /></li>
+        </ul>
+      </div>
+      <div id="result">
+        <!-- <ul>
+          <li class="win">W</li>
+          <li class="lose">L</li>
+          <li class="draw">D</li>
+        </ul> -->
+      </div>
+    </div>
+    <div id="cover">
+      <h2>To Be Contonue~~</h2>
+      <button id="btnRestart">restart game</button>
+    </div>
+  </body>
+  <script>
+    let sel = 0;
+    let count = 0;
+    const result = document.querySelector("#result");
+    const resultList = document.createElement("ul");
+    result.appendChild(resultList);
+
+    const comList = document.querySelectorAll("#com ul li");
+    const player = document.querySelectorAll("#player ul li"); // 배열처럼 생겨먹은 유사 배열 NodeList
+    const playerList = document.querySelector("#player ul ");
+    const cover = document.querySelector("#cover");
+    const btnRestart = document.querySelector("#btnRestart");
+    /*for (let i = 0; i < comList.length; i++) {
+      comList[i].style.display = "none";
+    }*/
+
+    //console.log(comList);
+
+    //let count = 0;
+    // setTimeout(() => {
+    //   console.log("나는 한번만 합니다.");
+    // }, 1000);   한번만 찍힘
+    const comChoice = () => {
+      comList.forEach((element, index) => {
+        element.style.display = "none";
+      });
+      sel = Math.floor(Math.random() * 3); //0~2.99999999999
+      comList[sel].style.display = "block";
+      //console.log("나는 setInterval이 찍는 콘솔");
+    };
+    let clearIdx = setInterval(comChoice, 30);
+    let gameIdx;
+    player.forEach((element, index) => {
+      element.addEventListener("click", () => {
+        clearInterval(clearIdx); //멈추기
+        element.classList.add("on");
+        playerList.classList.add("prevent");
+
+        if (sel === index) {
+          //console.log("비김");
+          resultList.innerHTML += `<li class="draw">D</li>`;
+        } else if (
+          (sel === 0 && index === 1) ||
+          (sel === 1 && index === 2) ||
+          (sel === 2 && index === 0)
+        ) {
+          //console.log("이김");
+          resultList.innerHTML += `<li class="win">W</li>`;
+        } else {
+          //console.log("짐");
+          resultList.innerHTML += `<li class="lose">L</li>`;
+        }
+        gameIdx = setTimeout(() => {
+          clearIdx = setInterval(comChoice, 30);
+          element.classList.remove("on");
+          playerList.classList.remove("prevent");
+        }, 1000);
+        count++;
+        if (count >= 3) {
+          clearTimeout(gameIdx);
+          cover.style.display = "flex";
+          btnRestart.addEventListener("click", () => {
+            cover.style.display = "none";
+            count = 0;
+            resultList.innerHTML = "";
+            gameIdx = setTimeout(() => {
+              clearIdx = setInterval(comChoice, 30);
+              element.classList.remove("on");
+              playerList.classList.remove("prevent");
+            }, 1000);
+          });
+        }
+      });
+    });
+    //비동기...순서없이 하는것(기다리지않음)
+    //동기...앞순서를 다 기다리면서 하는것(기다림) setInterval, setTimeout, node에 걸린 이벤트, ajax 등
+
+    console.log("나는 setInterval보다 먼저 실행될까요? 나중에 될까염?");
+  </script>
+
+  <script>
+    const num01 = 10; //숫자
+    const num02 = "10"; //string
+    console.log(num01 !== num02);
+    cover.style.display = "flex";
+    btnRestart.addEventListener("click", () => {
+      cover.style.display = "none";
+      count = 0;
+      resultList.innerHTML = "";
+      gameIdx = setTimeout(() => {
+        clearIdx = setInterval(comChoice, 30);
+        element.classList.remove("on");
+        playerList.classList.remove("prevent");
+      }, 1000);
+    });
+  </script>
+</html>
