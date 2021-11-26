@@ -126,16 +126,5 @@
     const num01 = 10; //숫자
     const num02 = "10"; //string
     console.log(num01 !== num02);
-    cover.style.display = "flex";
-    btnRestart.addEventListener("click", () => {
-      cover.style.display = "none";
-      count = 0;
-      resultList.innerHTML = "";
-      gameIdx = setTimeout(() => {
-        clearIdx = setInterval(comChoice, 30);
-        element.classList.remove("on");
-        playerList.classList.remove("prevent");
-      }, 1000);
-    });
   </script>
 </html>
