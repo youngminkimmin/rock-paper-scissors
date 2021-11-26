@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="" id="input01" value="99" /><span>+</span>
+    <input type="text" name="" id="input02" />
+    <button id="plusBtn">=</button>
+    <input type="text" name="" id="resultTxt" />
+  </body>
+  <script>
+    //const result = num01 + num02;
+    //특정 객체안에 만들어진 함수를 메서드라고 부른다.
+    //특정 객체가 가지는 변수를 속성이라고 부른다.
+    //객체는 메서드와 속성을 정의해놓은 설명서
+    //console.log(document.querySelector("#input01"));
+    const input01 = document.querySelector("#input01");
+    const input02 = document.querySelector("#input02");
+    const plusBtn = document.querySelector("#plusBtn");
+    const resultTxt = document.querySelector("#resultTxt");
+    plusBtn.addEventListener("click", function () {
+      //console.log("click");
+      //const num01 = parseInt(input01.value, 10);
+      //const num02 = parseInt(input02.value, 10);
+
+      const num01 = Number(input01.value);
+      const num02 = Number(input02.value);
+      //console.log(typeof num01);
+      resultTxt.value = add(num01, num02);
+    });
+    function add(num01, num02) {
+      return num01 + num02;
+    }
+    const result = add(4378, 849834);
+
+    console.log(result);
+  </script>
+</html>
